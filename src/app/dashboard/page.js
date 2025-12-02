@@ -1,8 +1,16 @@
 // https://invoiceninja.com/ Inspired from this website
 "use client";
 import { useState } from 'react';
-import { PDFViewer } from '@react-pdf/renderer';
+import dynamic from "next/dynamic";
 import { InvoicePDF } from '@/components/InvoicePDF';
+
+const PDFViewer = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
+  {
+    ssr: false,
+    loading: () => <p>Loading PDF...</p>,
+  }
+);
 
 export default function Dashboard() {
   // 1. STATE: This holds all your invoice data
