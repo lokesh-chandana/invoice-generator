@@ -1,10 +1,13 @@
-import { SessionProvider } from "next-auth/react";
 import PageHome from "@/components/PageHome";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <SessionProvider>
-      <PageHome />
-    </SessionProvider>
-  );
+export default async function Home() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
+  return <PageHome />;
 }

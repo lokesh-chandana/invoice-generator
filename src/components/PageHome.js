@@ -14,7 +14,7 @@ export default function PageHome() {
       <Header />
       
       {/* Main Content Placeholder */}
-      <main className="pt-30 px-8">
+      <main className="pt-20 px-8">
         <div className="max-w-5xl mx-auto text-center mt-20">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             Make it easy for clients to pay you.
