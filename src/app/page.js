@@ -1,13 +1,18 @@
+"use client";
 import PageHome from "@/components/PageHome";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default async function Home() {
-  const session = await auth();
+export default function Home() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  if (session) {
-    redirect("/dashboard");
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status, router]);
 
   return <PageHome />;
 }
